@@ -1,2 +1,2 @@
 # react-native-todo-app
-todo app using react native 
+- This is simple Todo app using React-native & EXPO

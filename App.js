@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, View, FlatList, Alert } from 'react-native';
 import Header from './components/header';
 import TodoItem from './components/todoItem';
 import AddItem from './components/addItem';
@@ -23,8 +23,8 @@ export default function App() {
           if (text.length > 3) {
             setTodos(prevTodos => {
 
-              if ( Object.keys(prevTodos).some(key => prevTodos[key].text === text)) {
-                console.log('PrevTodos exists');
+              if (Object.keys(prevTodos).some(key => prevTodos[key].text === text)) {
+                Alert.alert("Error", "Already Exists", [{ text: 'OK', onPress: () => { console.log("Alert closed") } }])
                 return prevTodos;
               }
 
@@ -35,6 +35,9 @@ export default function App() {
                 }, ...prevTodos]
               }
             })
+          }
+          else {
+            Alert.alert('Error', 'Todo must be atleast 3 characters long', [{ text: 'OK', onPress: () => { console.log("Alert closed") } }])
           }
         }
         } />

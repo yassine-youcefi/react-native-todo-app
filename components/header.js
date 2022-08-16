@@ -14,14 +14,16 @@ export default function Header({title}) {
 const styles = StyleSheet.create({
     header: {
         height: '10%',
-        backgroundColor: '#111d5e',
-        alignItems: 'center',
+        marginTop: 35,
+        backgroundColor: '#16504b',
         justifyContent: 'center',
+        paddingLeft: 20,
     },
     title:{
         color: '#fff',
         fontSize: 20,
         fontWeight: 'bold',
+        fontFamily: 'sans-serif-medium',
 
     }
 })

@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import Header from './components/header';
 import TodoItem from './components/todoItem';
+import AddItem from './components/addItem';
+
 
 export default function App() {
   const [todos, setTodos] = useState([
@@ -16,10 +18,17 @@ export default function App() {
       return prevTodos.filter(todo => todo.key != key)
     })
   }
+
     return (
       <View style={styles.container}>
         <Header title="Todo :" />
         <View style={styles.subContainer}>
+          <AddItem addHandler={(text) => {
+            setTodos(prevTodos => {
+              return [{ text: text, key: Math.random().toString() }, ...prevTodos]
+            })
+          }
+          } />
           <View style={styles.list}>
             <FlatList
               data={todos}

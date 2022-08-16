@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         marginHorizontal: 10,
         fontSize: 20,
-        color: '#16504b',
+        color: '#00a9d4',
         fontFamily: 'sans-serif-medium',
     },
 }

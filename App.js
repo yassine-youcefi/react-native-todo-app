@@ -14,33 +14,35 @@ export default function App() {
       return prevTodos.filter(todo => todo.key != key)
     })
   }
+  const addHandler = (text) => {
+    if (text.length > 3) {
+      setTodos(prevTodos => {
+
+        if (Object.keys(prevTodos).some(key => prevTodos[key].text === text)) {
+          Alert.alert("Error", "Already Exists", [{ text: 'OK', onPress: () => { console.log("Alert closed") } }])
+          return prevTodos;
+        }
+
+        else {
+          return [{
+
+            text: text, key: Math.random().toString()
+          }, ...prevTodos]
+        }
+      })
+    }
+    else {
+      Alert.alert('Error', 'Todo must be atleast 3 characters long', [{ text: 'OK', onPress: () => { console.log("Alert closed") } }])
+    }
+  }
 
   return (
     <View style={styles.container}>
       <Header title="Todo :" />
       <View style={styles.subContainer}>
-        <AddItem addHandler={(text) => {
-          if (text.length > 3) {
-            setTodos(prevTodos => {
-
-              if (Object.keys(prevTodos).some(key => prevTodos[key].text === text)) {
-                Alert.alert("Error", "Already Exists", [{ text: 'OK', onPress: () => { console.log("Alert closed") } }])
-                return prevTodos;
-              }
-
-              else {
-                return [{
-
-                  text: text, key: Math.random().toString()
-                }, ...prevTodos]
-              }
-            })
-          }
-          else {
-            Alert.alert('Error', 'Todo must be atleast 3 characters long', [{ text: 'OK', onPress: () => { console.log("Alert closed") } }])
-          }
-        }
-        } />
+      
+        <AddItem addHandler={addHandler} />
+        
         <View style={styles.list}>
           <FlatList
             data={todos}
@@ -48,10 +50,8 @@ export default function App() {
             renderItem={({ item }) => <TodoItem item={item} pressHandler={pressHandler} />}
           />
         </View>
-
-
+      
       </View>
-
       <StatusBar style="auto" />
     </View>
   );

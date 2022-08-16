@@ -5,7 +5,6 @@ import { useState } from "react";
 export default function AddItem({ addHandler }) {
     const [text, setText] = useState("");
     const pressHandler = () => {
-        console.log(text);
         addHandler(text);
         setText("");
     }

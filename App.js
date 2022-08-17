@@ -17,24 +17,12 @@ export default function App() {
   const addHandler = (text) => {
     if (text.length > 3) {
       setTodos(prevTodos => {
-        console.log('----> ', Object.keys(prevTodos))
         todos.some(todo => {
           todo.text === text ? Alert.alert("Error",'Already Exists') : setTodos(prevTodos => {
             return [...prevTodos, { text: text, key: Math.random().toString() }]
           }
           )
 
-          // if (Object.keys(prevTodos).some(key => prevTodos[key].text === text)) {
-          //   Alert.alert("Error", "Already Exists", [{ text: 'OK', onPress: () => { console.log("Alert closed") } }])
-          //   return prevTodos;
-          // }
-
-          // else {
-          // return [{
-
-          //   text: text, key: Math.random().toString()
-          // }, ...prevTodos]
-          // }
         })
       })
     }

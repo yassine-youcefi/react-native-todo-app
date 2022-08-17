@@ -17,18 +17,25 @@ export default function App() {
   const addHandler = (text) => {
     if (text.length > 3) {
       setTodos(prevTodos => {
+        console.log('----> ', Object.keys(prevTodos))
+        todos.some(todo => {
+          todo.text === text ? Alert.alert("Error",'Already Exists') : setTodos(prevTodos => {
+            return [...prevTodos, { text: text, key: Math.random().toString() }]
+          }
+          )
 
-        if (Object.keys(prevTodos).some(key => prevTodos[key].text === text)) {
-          Alert.alert("Error", "Already Exists", [{ text: 'OK', onPress: () => { console.log("Alert closed") } }])
-          return prevTodos;
-        }
+          // if (Object.keys(prevTodos).some(key => prevTodos[key].text === text)) {
+          //   Alert.alert("Error", "Already Exists", [{ text: 'OK', onPress: () => { console.log("Alert closed") } }])
+          //   return prevTodos;
+          // }
 
-        else {
-          return [{
+          // else {
+          // return [{
 
-            text: text, key: Math.random().toString()
-          }, ...prevTodos]
-        }
+          //   text: text, key: Math.random().toString()
+          // }, ...prevTodos]
+          // }
+        })
       })
     }
     else {
@@ -40,9 +47,9 @@ export default function App() {
     <View style={styles.container}>
       <Header title="Todo :" />
       <View style={styles.subContainer}>
-      
+
         <AddItem addHandler={addHandler} />
-        
+
         <View style={styles.list}>
           <FlatList
             data={todos}
@@ -50,7 +57,7 @@ export default function App() {
             renderItem={({ item }) => <TodoItem item={item} pressHandler={pressHandler} />}
           />
         </View>
-      
+
       </View>
       <StatusBar style="auto" />
     </View>
